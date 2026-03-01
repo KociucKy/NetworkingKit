@@ -1,0 +1,24 @@
+# Swift Package Manager
+.build/
+*.resolved
+
+# Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# SwiftPM resolved file (opt-in to commit this if you want reproducible builds)
+# Package.resolved
