@@ -1,7 +1,7 @@
 import Foundation
 
 /// Errors that can be thrown by `NetworkingKit`.
-public enum NetworkError: Error, Sendable {
+public enum NetworkError: Error, Sendable, Equatable {
     /// The request path could not be combined with the base URL.
     case invalidURL
     /// The server returned a 401 Unauthorized response.
@@ -14,6 +14,23 @@ public enum NetworkError: Error, Sendable {
     case noData
     /// A transport-level or other underlying error.
     case underlying(Error)
+}
+
+// MARK: - Equatable
+
+extension NetworkError {
+    public static func == (lhs: NetworkError, rhs: NetworkError) -> Bool {
+        switch (lhs, rhs) {
+        case (.invalidURL, .invalidURL): return true
+        case (.unauthorized, .unauthorized): return true
+        case (.noData, .noData): return true
+        case (.serverError(let lCode, let lData), .serverError(let rCode, let rData)):
+            return lCode == rCode && lData == rData
+        case (.decodingFailed, .decodingFailed): return true
+        case (.underlying, .underlying): return true
+        default: return false
+        }
+    }
 }
 
 // MARK: - LocalizedError
